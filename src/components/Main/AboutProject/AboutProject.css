@@ -1,0 +1,100 @@
+.about-project {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: #202020;
+  padding-top: 110px;
+  padding-bottom: 140px;
+  color: white;
+}
+
+.about-project__steps {
+  display: flex;
+  flex-direction: row;
+  max-width: 957px;
+  margin-top: 70px;
+}
+
+.about-project__step-title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.about-project__step {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 26px 0 0 0;
+}
+
+.about-project__chart {
+  display: flex;
+  margin-top: 110px;
+}
+
+.about-project__step-column {
+  width: 50%;
+}
+
+.about-project__chart-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-project__chart-column_left {
+  flex: 0 0 228px;
+}
+
+.about-project__chart-column_right {
+  flex: 1 0 auto;
+}
+
+.about-project__left-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  background-color: #3DDC84;
+}
+
+.about-project__right-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  background-color: #303030;
+}
+
+.about-project__chart-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: white;
+  margin: 0;
+}
+
+.about-project__chart-text_black {
+  color: black;
+}
+
+.about-project__chart-note {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+  margin: 14px 0 0 0;
+}

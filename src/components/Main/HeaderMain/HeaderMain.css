@@ -1,0 +1,9 @@
+.HeaderMain__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  padding: 0 0 23px 0;
+  border-bottom: solid white 1px;
+}
