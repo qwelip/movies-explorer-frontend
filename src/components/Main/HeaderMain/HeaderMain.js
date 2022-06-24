@@ -4,7 +4,7 @@ import './HeaderMain.css';
 const HeaderMain = ({str}) => {
   return (
     <>
-      <h2 className='HeaderMain__title'>{str}</h2>
+      <h2 className='header-main__title'>{str}</h2>
     </>
   );
 };

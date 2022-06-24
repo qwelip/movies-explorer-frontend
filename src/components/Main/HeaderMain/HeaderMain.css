@@ -1,4 +1,4 @@
-.HeaderMain__title {
+.header-main__title {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -6,4 +6,5 @@
   line-height: 27px;
   padding: 0 0 23px 0;
   border-bottom: solid white 1px;
+  margin: 0;
 }

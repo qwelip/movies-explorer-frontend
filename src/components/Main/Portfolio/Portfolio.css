@@ -1,5 +1,5 @@
 .portfolio {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   color: white;
   background-color: #202020;
@@ -21,6 +21,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: inherit;
+  text-decoration: none;
+}
+
+.portfolio__link-block:hover {
+  opacity: 0.5;
 }
 
 .portfolio__link-block:not(:last-child) {
@@ -37,15 +45,12 @@
   margin: 0 0 19px 0;
 }
 
-.portfolio__link {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding-bottom: 90px;
+  }
 
-.portfolio__link:hover {
-  opacity: 0.5;
-}
-
-.portfolio__link-icon {
-
+  .portfolio__link-title {
+    font-size: 28px;
+  }
 }

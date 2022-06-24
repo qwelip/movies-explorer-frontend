@@ -1,0 +1,57 @@
+.header {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.header__block {
+  display: flex;
+  height: 74px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__reg-btn {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: white;
+  text-decoration: none;
+  margin: 0 30px 0 0;
+}
+
+.header__login-btn {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  margin: 0;
+  padding: 8px 20px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+}
+
+.header__reg-btn,.header__login-btn {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header__login-btn:hover {
+  opacity: 0.5;
+}
+
+.header__reg-btn:hover {
+  opacity: 0.5;
+}

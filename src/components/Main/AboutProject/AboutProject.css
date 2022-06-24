@@ -1,5 +1,5 @@
 .about-project {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   background-color: #202020;
   padding-top: 110px;
@@ -39,6 +39,7 @@
 
 .about-project__step-column {
   width: 50%;
+  padding-right: 20px;
 }
 
 .about-project__chart-column {
@@ -97,4 +98,15 @@
   text-align: center;
   color: #8B8B8B;
   margin: 14px 0 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding-top: 90px;
+    padding-bottom: 120px;
+  }
+
+  .about-project__chart {
+    margin-top: 90px;
+  }
 }

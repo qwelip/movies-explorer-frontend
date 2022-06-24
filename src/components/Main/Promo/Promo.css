@@ -1,5 +1,5 @@
 .promo {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   background-color: #073042;
   padding-top: 124px;
@@ -25,4 +25,26 @@
 .promo__logo {
   margin-top: 102px;
   margin-bottom: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding-top: 374px;
+  }
+
+  .promo__wrapper {
+    justify-content: center;
+  }
+
+  .promo__logo {
+    width: 100%;
+    height: 230px;
+    margin-top: 140px;
+    margin-bottom: 70px;
+  }
+  
+  .promo__title {
+    max-width: unset;
+    text-align: center;
+  }
 }
