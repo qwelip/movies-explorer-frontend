@@ -1,10 +1,16 @@
 import React from 'react';
+import MoviesCardList from './MoviesCardList/MoviesCardList';
+import SearchForm from './SearchForm/SearchForm';
+import './Movies.css';
 
 const Movies = () => {
   return (
-    <div>
-      
-    </div>
+    <section className='movies'>
+      <div className="wrapper">
+        <SearchForm/>
+        <MoviesCardList/>
+      </div>
+    </section>
   );
 };
 

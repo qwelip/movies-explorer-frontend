@@ -1,9 +1,19 @@
 import React from 'react';
+import './MoviesCard.css';
+import dislike from '../../../images/dislike.png';
+import like from '../../../images/like.png';
 
-const MoviesCard = () => {
+import TEMP from '../../../images/TEMP.png';
+
+const MoviesCard = ({title, length}) => {
   return (
-    <div>
-      
+    <div className='movies-card'>
+      <img className='movies-card__foto' src={TEMP} alt="Фото из фильма" />
+      <div className="movies-card__block">
+        <p className='movies-card__title'>{title}</p>
+        <img className='movies-card__like' src={like} alt="Кнопка лайка" />
+      </div>
+      <p className='movies-card__duration'>{length}</p>
     </div>
   );
 };

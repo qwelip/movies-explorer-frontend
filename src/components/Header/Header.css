@@ -3,6 +3,7 @@
   margin: 0 auto;
   position: absolute;
   top: 0;
+  color: white;
   left: 0;
 }
 
@@ -19,15 +20,18 @@
   justify-content: center;
 }
 
+.header__reg {
+  text-decoration: none;
+}
+
 .header__reg-btn {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: white;
-  text-decoration: none;
   margin: 0 30px 0 0;
+  color: white;
 }
 
 .header__login-btn {
@@ -54,6 +58,32 @@
 
 .header__reg-btn:hover {
   opacity: 0.5;
+}
+
+.header__account {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+.header__account:hover {
+  opacity: 0.5;
+}
+
+.header__account-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin-right: 17px;
+}
+
+.header__avatar {
+  background-color: #313131;
+  padding: 8px 7px;
+  border-radius: 4px;
 }
 
 @media screen and (max-width: 500px) {

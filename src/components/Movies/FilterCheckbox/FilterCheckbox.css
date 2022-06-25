@@ -1,0 +1,25 @@
+.filterCheckbox {
+  display: flex;
+  color: white;
+  align-items: center;
+}
+
+.filterCheckbox__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0 14px 0 0;
+}
+
+.filterCheckbox__checkbox {
+  width: 44px;
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.filterCheckbox__checkbox:hover {
+  opacity: 0.5;
+}
