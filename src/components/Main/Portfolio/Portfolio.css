@@ -52,5 +52,24 @@
 
   .portfolio__link-title {
     font-size: 28px;
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .portfolio {
+    padding-bottom: 70px;
+  }
+  .portfolio__title {
+    margin-bottom: 40px;
+  }
+  .portfolio__link-title {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .portfolio__link-icon {
+    margin-bottom: 17px;
+    width: 12px;
+    height: 12px;
   }
 }

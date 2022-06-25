@@ -109,4 +109,64 @@
   .about-project__chart {
     margin-top: 90px;
   }
+
+  .about-project__steps {
+    margin-top: 60px;
+    flex-wrap: wrap;
+  }
+
+  .about-project__column {
+    margin-top: 56px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .about-project__chart-column_left {
+    flex: 0 0 100px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  
+
+  .about-project__step-column {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .about-project__step-title {
+    font-size: 18px;
+    line-height: 22px;
+    line-height: 22px;
+  }
+
+  .about-project__step {
+    margin-top: 16px;
+  }
+
+  .about-project__step {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__chart {
+    margin-top: 60px;
+  }
+
+  .about-project {
+    padding-bottom: 93px;
+  }
+
+  .about-project__chart-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__chart-note {
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 10px;
+  }
 }

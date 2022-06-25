@@ -13,9 +13,11 @@ const Techs = () => {
         {<HeaderMain str='Технологии'/>} 
         <h3 className='techs__title'>7 технологий</h3>
         <p className='techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
-        <ul className="techs__list">
-          {techs.map( item => <TeckBlock str={item}/>)}
-        </ul>
+        <div className="techs__list-wrapper">
+          <ul className="techs__list">
+            {techs.map( item => <TeckBlock str={item}/>)}
+          </ul>
+        </div>
       </div>
     </section>
   );

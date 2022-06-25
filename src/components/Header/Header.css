@@ -55,3 +55,16 @@
 .header__reg-btn:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 500px) {
+  .header__reg-btn {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+  .header__login-btn {
+    font-size: 10px;
+  }
+  .header__login-btn {
+    padding: 5px 12px;
+  }
+}
