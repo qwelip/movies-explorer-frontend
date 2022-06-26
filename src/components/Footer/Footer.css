@@ -77,4 +77,9 @@
   .footer__link:not(:last-child) {
     margin: 0 0 12px 0;
   }
+  .footer__year {
+    color: #8B8B8B;
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

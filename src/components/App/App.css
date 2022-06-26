@@ -33,4 +33,13 @@
   .wrapper {
     padding: 0 18px;
   }
+  .movies .wrapper {
+    padding: 0 10px;
+  }
+  .header .wrapper {
+    padding: 0 10px;
+  }
+  .footer .wrapper {
+    padding: 0 10px;
+  }
 }

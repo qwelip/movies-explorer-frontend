@@ -5,7 +5,22 @@
   padding-top: 80px;
   color: white;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
   gap: 20px;
   row-gap: 38px;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card-list {
+    gap: 30px;
+    row-gap: 30px;
+    padding-top: 70px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movies-card-list {
+    padding-top: 45px;
+    row-gap: 34px;
+  }
 }

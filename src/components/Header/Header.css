@@ -60,18 +60,18 @@
   opacity: 0.5;
 }
 
-.header__account {
+.header__account-block{
   display: flex;
   align-items: center;
   transition: all 0.3s ease-in;
   cursor: pointer;
 }
 
-.header__account:hover {
+.header__account-block:hover {
   opacity: 0.5;
 }
 
-.header__account-name {
+.header__account-block-name {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -84,6 +84,62 @@
   background-color: #313131;
   padding: 8px 7px;
   border-radius: 4px;
+}
+
+.header__popup-menu {
+  position: relative;
+}
+
+.header__popup-menu-btn {
+  background-color: unset;
+  border: unset;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.header__popup-menu-block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  top: 80px;
+  left: -129px;
+  width: 165px;
+  height: 145px;
+  background-color: #202020;
+  z-index: 10;
+  padding: 10px 5px 10px 3px;
+  border-radius: 5px;
+  box-shadow: -14px 0px 20px 5px rgba(0, 0, 0, 0.25);
+}
+
+.header__popup-menu-block_closed {
+  display: none;
+}
+
+.popup-menu:hover {
+  opacity: 0.5;
+}
+
+@media screen and (min-width: 769px) {
+  .header__popup-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__account-block {
+    margin-left: auto;
+  }
+
+  .header__account-block-hider {
+    display: none;
+  }
+  .header__navigation-hider {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 500px) {

@@ -33,3 +33,21 @@
 .searchForm__search-img:hover {
   transform: scale(105%);
 }
+
+@media screen and (max-width: 768px) {
+  .searchForm {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 57px;
+  }
+  .searchForm__input {
+    flex: 1 1 100%;
+    margin-right: 0;
+  }
+  .searchForm__search-btn {
+    right: 0;
+  }
+  .filterCheckbox {
+    margin-top: 38px;
+  }
+}

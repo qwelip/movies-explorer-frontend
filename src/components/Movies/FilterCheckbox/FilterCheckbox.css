@@ -16,10 +16,17 @@
 .filterCheckbox__checkbox {
   width: 44px;
   height: 30px;
+  padding-top: 7px;
   cursor: pointer;
   transition: all 0.3s ease-in;
 }
 
 .filterCheckbox__checkbox:hover {
   opacity: 0.5;
+}
+
+@media screen and (max-width: 400px) {
+  .filterCheckbox {
+    margin-top: 45px;
+  }
 }
