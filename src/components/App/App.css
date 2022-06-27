@@ -25,6 +25,12 @@
 
 @media screen and (max-width: 1280px) {
   .wrapper {
+    padding: 0 70px;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .wrapper {
     padding: 0 30px;
   }
 }
