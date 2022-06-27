@@ -29,7 +29,7 @@ const AccountBlock = () => {
   )
 }
 
-const PopupMenu = ({children}) => {
+const PopupMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {
     setIsOpen(!isOpen)
@@ -40,9 +40,10 @@ const PopupMenu = ({children}) => {
         <img src={menu} alt="Меню" />
       </button>
 
-      <nav className={isOpen ? "header__popup-menu-block" : "header__popup-menu-block header__popup-menu-block_closed"}>
-        {children.map(item => item)}
-      </nav>
+      <div className={isOpen ? "header__popup-menu-block" : "header__popup-menu-block header__popup-menu-block_closed"}>
+        <Navigation onClose={handleClick}/>
+        <AccountBlock/>
+      </div>
     </div>
   );
 };
@@ -60,10 +61,7 @@ const Header = () => {
             <AccountBlock/>
           </div>
           {/* <RegAndLoginBlock/> */}
-          <PopupMenu>
-            <Navigation/>
-            <AccountBlock/>
-          </PopupMenu>
+          <PopupMenu/>
         </div>
       </div>
     </header>

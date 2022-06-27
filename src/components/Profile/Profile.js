@@ -7,7 +7,7 @@ const Profile = () => {
     <section className='profile'>
       <h1 className='profile__title'>Привет, Андрей!</h1>
       <div className="profile__wrapper">
-        <Form/>
+        
       </div>
     </section>
   );
