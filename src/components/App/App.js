@@ -14,14 +14,14 @@ import './App.css';
 const App = () => {
   return (
     <main className='main'>
-      <Header/>
+      {/* <Header/> */}
       {/* <Login/> */}
-      {/* <Register/> */}
+      <Register/>
       {/* <Profile/> */}
       {/* <Main/> */}
-      <Movies/>
+      {/* <Movies/> */}
       {/* <SavedMovies/> */}
-      <Footer/>
+      {/* <Footer/> */}
       {/* <PageNotFound/> */}
     </main>
   );

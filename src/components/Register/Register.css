@@ -4,7 +4,7 @@
   background-color: #202020;
   padding-top: 70px;
   color: white;
-  height: calc(100vh);
+  height: calc(100vh - 70px);
 }
 
 .register__wrapper {
