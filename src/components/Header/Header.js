@@ -4,28 +4,29 @@ import menu from '../../images/menu.png';
 import avatar from '../../images/ava.png'
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const RegAndLoginBlock = () => {
   return (
     <nav className='header__nav'>
-      <a className='header__reg' href="">
+      <Link className='header__reg' to='/signup'>
         <p className='header__reg-btn'>Регистрация</p>
-      </a>
-      <a className='header__login' href="">
+      </Link>
+      <Link className='header__login' to='/signin'>
         <button className='header__login-btn'>
           Войти
         </button>
-      </a>
+      </Link>
     </nav>
   )
 }
 
-const AccountBlock = () => {
+const AccountBlock = ({onClose}) => {
   return (
-    <div className="header__account-block">
-      <p className='header__account-block-name'>Account</p>
+    <NavLink className="header__account-block" activeClassName='header__account-block_active' to='/profile' onClick={onClose}>
+      <p className='header__account-block-name'>Аккаунт</p>
       <img className='header__avatar' src={avatar} alt="Аватар" />
-    </div>
+    </NavLink>
   )
 }
 
@@ -42,26 +43,35 @@ const PopupMenu = () => {
 
       <div className={isOpen ? "header__popup-menu-block" : "header__popup-menu-block header__popup-menu-block_closed"}>
         <Navigation onClose={handleClick}/>
-        <AccountBlock/>
+        <AccountBlock onClose={handleClick}/>
       </div>
     </div>
   );
 };
 
 const Header = () => {
+
+  const { pathname } = useLocation();
+
   return (
     <header className='header'>
       <div className="wrapper">
         <div className="header__block">
-          <img className='header__logo' src={logo} alt="Логотип" />
-          <div className="header__navigation-hider">
-            <Navigation/>
-          </div>
-          <div className="header__account-block-hider">
-            <AccountBlock/>
-          </div>
-          {/* <RegAndLoginBlock/> */}
-          <PopupMenu/>
+          <Link to='/'>
+            <img className='header__logo' src={logo} alt="Логотип" />
+          </Link>
+          {pathname !== '/' &&
+          <>
+            <div className="header__navigation-hider">
+              <Navigation/>
+            </div>
+            <div className="header__account-block-hider">
+              <AccountBlock/>
+            </div>
+          </>
+          }
+          {pathname === '/' && <RegAndLoginBlock/>}
+          {pathname !== '/' && <PopupMenu/>}
         </div>
       </div>
     </header>

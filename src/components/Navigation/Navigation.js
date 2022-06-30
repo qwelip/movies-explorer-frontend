@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import close from '../../images/close.png';
 import './Navigation.css';
 
@@ -8,9 +9,15 @@ const Navigation = ({onClose}) => {
       <button className='navigation__btn' onClick={onClose}>
         <img className='navigation__close' src={close} alt="Закрыть" />
       </button>
-      <p className='navigation__text'>Главная</p>
-      <a className='navigation__link navigation__link_first' href="">Фильмы</a>
-      <a className='navigation__link' href="">Сохранённые фильмы</a>
+      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' exact to='/' onClick={onClose}>
+        Главная
+      </NavLink>
+      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' to='/movies' onClick={onClose}>
+        Фильмы
+      </NavLink>
+      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' to='/saved-movies' onClick={onClose}>
+        Сохранённые фильмы
+      </NavLink>
     </nav>
   );
 };

@@ -29,6 +29,9 @@
 }
 
 .page-not-found__link {
+  border: unset;
+  background-color: unset;
+  padding: 0;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;

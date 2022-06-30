@@ -1,14 +1,19 @@
 import React, { useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Form.css';
 
 const Form = () => {
 
+  const { pathname } = useLocation()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const nameRef = useRef(null)
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const btnCaption = pathname === '/signin' ? 'Войти' : 'Зарегистрироваться';
+  const caption = pathname === '/signin' ? 'Регистрация' : 'Войти';
+  const link = pathname === '/signin' ? '/signup' : '/signin';
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -17,15 +22,15 @@ const Form = () => {
   const handleFocus = (e) => {
     switch(e.target.id) {
       case 'name': {
-        nameRef.current.classList.add('form__label_type_name_active')
+        nameRef.current.classList.add('form__label_active')
         break
       }
       case 'email': {
-        emailRef.current.classList.add('form__label_type_email_active')
+        emailRef.current.classList.add('form__label_active')
         break
       }
       case 'password': {
-        passwordRef.current.classList.add('form__label_type_password_active')
+        passwordRef.current.classList.add('form__label_active')
         break
       }
       default:
@@ -36,15 +41,15 @@ const Form = () => {
   const handleBlur = (e) => {
     switch(e.target.id) {
       case 'name': {
-          !name && nameRef.current.classList.remove('form__label_type_name_active')
+          !name && nameRef.current.classList.remove('form__label_active')
         break
       }
       case 'email': {
-        !email && emailRef.current.classList.remove('form__label_type_email_active')
+        !email && emailRef.current.classList.remove('form__label_active')
         break
       }
       case 'password': {
-        !password && passwordRef.current.classList.remove('form__label_type_password_active')
+        !password && passwordRef.current.classList.remove('form__label_active')
         break
       }
       default:
@@ -55,46 +60,56 @@ const Form = () => {
   return (
     <form action="#" onSubmit={handleSubmit} className='form' >
       <div className="form__inputs">
-        <label ref={nameRef} className='form__label form__label_type_name'>Имя</label>
-        <input 
-          id='name' 
-          className='form__input' 
-          type="text" 
-          onChange={(e) => setName(e.target.value)} 
-          onFocus={handleFocus} 
-          onBlur={handleBlur}
-          required
-        />
+        {(pathname === '/profile' || pathname === '/signup') &&
+          <div className='form__input-block'>
+            <label ref={nameRef} className='form__label'>Имя</label>
+            <input 
+              id='name' 
+              className='form__input' 
+              type="text" 
+              onChange={(e) => setName(e.target.value)} 
+              onFocus={handleFocus} 
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+        }
 
-        <label ref={emailRef} className='form__label form__label_type_email'>E-mail</label>
-        <input 
-          id='email'
-          className='form__input' 
-          type="email" 
-          onChange={(e) => setEmail(e.target.value)} 
-          onFocus={handleFocus} 
-          onBlur={handleBlur}
-          required
-        />
+        <div className='form__input-block'>
+          <label ref={emailRef} className='form__label'>E-mail</label>
+          <input 
+            id='email'
+            className='form__input' 
+            type="email" 
+            onChange={(e) => setEmail(e.target.value)} 
+            onFocus={handleFocus} 
+            onBlur={handleBlur}
+            required
+          />
+        </div>
 
-        <label ref={passwordRef} className='form__label form__label_type_password'>Password</label>
-        <input 
-          id='password' 
-          className='form__input form__input_error' 
-          type="password"
-          onChange={(e) => setPassword(e.target.value)} 
-          onFocus={handleFocus} 
-          onBlur={handleBlur}
-          required
-        />
-        <label className='form__password-error-text'>Что-то пошло не так...</label>
+        <div className='form__input-block'>
+          <label ref={passwordRef} className='form__label'>Password</label>
+          <input 
+            id='password' 
+            className='form__input form__input_error' 
+            type="password"
+            onChange={(e) => setPassword(e.target.value)} 
+            onFocus={handleFocus} 
+            onBlur={handleBlur}
+            required
+          />
+          <label className='form__password-error-text'>Что-то пошло не так...</label>
+        </div>
       </div>
       
       <div className="form__footer">
-        <button className='form__button' type='submit'>Зарегистрироваться</button>
+        <button className='form__button' type='submit'>{btnCaption}</button>
         <span className='form__line'>
-          <p className='form__text'>Уже зарегистрированы?</p>
-          <a className='form__link' href="">Войти</a>
+          <p className='form__text'>Ещё не зарегистрированы?</p>
+          <Link className='form__link' to={link}>
+            {caption}
+          </Link>
         </span>
       </div>
     </form>

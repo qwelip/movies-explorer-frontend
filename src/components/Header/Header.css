@@ -66,6 +66,8 @@
 
 .header__account-block{
   display: flex;
+  color: white;
+  text-decoration: none;
   align-items: center;
   transition: all 0.3s ease-in;
   cursor: pointer;
@@ -73,6 +75,10 @@
 
 .header__account-block:hover {
   opacity: 0.5;
+}
+
+.header__account-block_active {
+  text-decoration: underline;
 }
 
 .header__account-block-name {
