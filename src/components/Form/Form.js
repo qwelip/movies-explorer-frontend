@@ -11,7 +11,7 @@ const Form = () => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const btnCaption = pathname === '/signin' ? 'Войти' : 'Зарегистрироваться';
+  const btnCaption = pathname === '/signin' ? 'Войти' : pathname === '/profile' ? 'Оправить' : 'Зарегистрироваться';
   const caption = pathname === '/signin' ? 'Регистрация' : 'Войти';
   const link = pathname === '/signin' ? '/signup' : '/signin';
 
@@ -88,29 +88,33 @@ const Form = () => {
           />
         </div>
 
-        <div className='form__input-block'>
-          <label ref={passwordRef} className='form__label'>Password</label>
-          <input 
-            id='password' 
-            className='form__input form__input_error' 
-            type="password"
-            onChange={(e) => setPassword(e.target.value)} 
-            onFocus={handleFocus} 
-            onBlur={handleBlur}
-            required
-          />
-          <label className='form__password-error-text'>Что-то пошло не так...</label>
-        </div>
+        {pathname !== '/profile' && 
+          <div className='form__input-block'>
+            <label ref={passwordRef} className='form__label'>Password</label>
+            <input 
+              id='password' 
+              className='form__input form__input_error' 
+              type="password"
+              onChange={(e) => setPassword(e.target.value)} 
+              onFocus={handleFocus} 
+              onBlur={handleBlur}
+              required
+            />
+            <label className='form__password-error-text'>Что-то пошло не так...</label>
+          </div>
+        }
       </div>
       
       <div className="form__footer">
         <button className='form__button' type='submit'>{btnCaption}</button>
-        <span className='form__line'>
-          <p className='form__text'>Ещё не зарегистрированы?</p>
-          <Link className='form__link' to={link}>
-            {caption}
-          </Link>
-        </span>
+        {pathname !== '/profile' && 
+          <span className='form__line'>
+            <p className='form__text'>Ещё не зарегистрированы?</p>
+            <Link className='form__link' to={link}>
+              {caption}
+            </Link>
+          </span>
+        }
       </div>
     </form>
   );

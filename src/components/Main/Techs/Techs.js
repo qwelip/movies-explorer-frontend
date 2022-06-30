@@ -15,7 +15,7 @@ const Techs = () => {
         <p className='techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
         <div className="techs__list-wrapper">
           <ul className="techs__list">
-            {techs.map( item => <TeckBlock str={item}/>)}
+            {techs.map( item => <TeckBlock key={item} str={item}/>)}
           </ul>
         </div>
       </div>

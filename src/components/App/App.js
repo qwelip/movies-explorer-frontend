@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import '../../vendor/normalize.css';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -15,7 +15,6 @@ import './App.css';
 const App = () => {
 
   const { pathname } = useLocation()
-
   return (
     <main className='main'>
       {(pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') && <Header/>}

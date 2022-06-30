@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Form from '../Form/Form';
+import Popup from '../Popup/Popup';
 import './Profile.css';
 
 const Profile = () => {
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsPopupOpen(!isPopupOpen)
+  }
+
   return (
     <section className='profile'>
       <h1 className='profile__title'>Привет, Андрей!</h1>
@@ -18,13 +25,14 @@ const Profile = () => {
         </div>
       </div>
       <ul className='profile__links'>
-        <button className='profile__link-btn'>
+        <button className='profile__link-btn' onClick={handleClick}>
           <li className='profile__link-edit'>Редактировать</li>
         </button>
         <Link className='profile__link-link' to='/signin'>
           <li className='profile__link-quit'>Выйти из аккаунта</li>
         </Link>
       </ul>
+      <Popup isPopupOpen={isPopupOpen} handleClick={handleClick}/>
     </section>
   );
 };
