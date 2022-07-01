@@ -41,7 +41,7 @@ const App = () => {
               <PageNotFound/>
             </Route>
           </Switch>
-        <Footer/>
+          {(pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') && <Footer/>}
     </main>
   );
 };
