@@ -2,12 +2,15 @@
   width: 100%;
 }
 
-.movies-card__like {
+.movies-card__btn {
   position: absolute;
-  bottom: 29px;
+  bottom: 27px;
   right: 0;
   cursor: pointer;
   transition: all 0.3s ease-in;
+  background-color: unset;
+  border: unset;
+  padding: 0;
 }
 
 .movies-card__like:hover {

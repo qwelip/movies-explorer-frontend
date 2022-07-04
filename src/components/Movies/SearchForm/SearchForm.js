@@ -5,13 +5,13 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchForm = () => {
   return (
-    <div className='searchForm'>
-      <input className='searchForm__input' type="text" placeholder='Фильм' />
-      <button className='searchForm__search-btn'>
+    <form action="#" className='searchForm'>
+      <input className='searchForm__input' type="text" placeholder='Фильм' required/>
+      <button type='submit' className='searchForm__search-btn'>
         <img className='searchForm__search-img' src={search} alt="Кнопка поиска" />
       </button>
       <FilterCheckbox/>
-    </div>
+    </form>
   );
 };
 

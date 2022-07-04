@@ -11,7 +11,9 @@ const MoviesCard = ({title, length}) => {
       <img className='movies-card__foto' src={TEMP} alt="Фото из фильма" />
       <div className="movies-card__block">
         <p className='movies-card__title'>{title}</p>
-        <img className='movies-card__like' src={like} alt="Кнопка лайка" />
+        <button className='movies-card__btn'>
+          <img className='movies-card__like' src={like} alt="Кнопка лайка" />
+        </button>
       </div>
       <p className='movies-card__duration'>{length}</p>
     </div>

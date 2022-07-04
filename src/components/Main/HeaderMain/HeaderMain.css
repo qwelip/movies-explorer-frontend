@@ -15,4 +15,7 @@
     line-height: 22px;
     padding: 0 0 28px 0;
   }
+  .techs .header-main__title {
+    border-bottom: solid black 1px;
+  }
 }

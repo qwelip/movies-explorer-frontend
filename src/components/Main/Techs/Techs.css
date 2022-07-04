@@ -76,6 +76,7 @@
 @media screen and (max-width: 500px) {
   .techs {
     padding: 70px 0;
+    background-color: #202020;
   }
   .techs__title {
     margin-top: 60px;

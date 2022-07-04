@@ -49,6 +49,7 @@
   margin: 0;
   padding: 8px 20px;
   background-color: #3DDC84;
+  border: unset;
   border-radius: 3px;
 }
 

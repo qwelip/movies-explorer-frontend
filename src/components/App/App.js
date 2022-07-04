@@ -16,8 +16,9 @@ const App = () => {
 
   const { pathname } = useLocation()
   return (
-    <main className='main'>
+    <>
       {(pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') && <Header/>}
+        <main className='main'>
           <Switch>
             <Route exact path='/'>
               <Main/> 
@@ -41,8 +42,9 @@ const App = () => {
               <PageNotFound/>
             </Route>
           </Switch>
-          {(pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') && <Footer/>}
-    </main>
+        </main>
+      {(pathname === '/' || pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') && <Footer/>}
+    </>
   );
 };
 
