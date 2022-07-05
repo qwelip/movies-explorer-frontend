@@ -1,0 +1,29 @@
+.teckBlock {
+  width: 90px;
+  height: 60px;
+  background-color: #303030;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+}
+
+
+.teckBlock__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 720px) {
+  .teckBlock {
+    width: 84px;
+    height: 57px;
+  }
+}

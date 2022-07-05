@@ -1,0 +1,183 @@
+.header {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  color: white;
+  left: 0;
+  z-index: 10;
+}
+
+.header__logo {
+  margin-right: 60px;
+}
+
+.header__block {
+  display: flex;
+  height: 74px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__reg {
+  text-decoration: none;
+}
+
+.header__reg-btn {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0 30px 0 0;
+  color: white;
+}
+
+.header__login-btn {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  margin: 0;
+  padding: 8px 20px;
+  background-color: #3DDC84;
+  border: unset;
+  border-radius: 3px;
+}
+
+.header__reg-btn,.header__login-btn {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header__login-btn:hover {
+  opacity: 0.5;
+}
+
+.header__reg-btn:hover {
+  opacity: 0.5;
+}
+
+.header__account-block{
+  display: flex;
+  color: white;
+  text-decoration: none;
+  align-items: center;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+.header__account-block:hover {
+  opacity: 0.5;
+}
+
+.header__account-block_active {
+  text-decoration: underline;
+}
+
+.header__account-block-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin-right: 17px;
+}
+
+.header__avatar {
+  background-color: #313131;
+  padding: 8px 7px;
+  border-radius: 4px;
+}
+
+.header__popup-menu-btn {
+  background-color: unset;
+  border: unset;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.header__popup-menu-block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 160px 0 92px;
+  box-sizing: border-box;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 520px;
+  height: 100vh;
+  background-color: #202020;
+  z-index: 20;
+  border-radius: 5px;
+  box-shadow: -14px 0px 20px 5px rgba(0, 0, 0, 0.25);
+}
+
+.header__popup-menu-block_closed {
+  display: none;
+}
+
+.popup-menu:hover {
+  opacity: 0.5;
+}
+
+@media screen and (min-width: 769px) {
+  .header__popup-menu {
+    display: none;
+  }
+  .navigation__btn {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__account-block-hider {
+    display: none;
+  }
+  .header__navigation-hider {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header__reg-btn {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+  .header__login-btn {
+    font-size: 10px;
+  }
+  .header__login-btn {
+    padding: 5px 12px;
+  }
+  .header__popup-menu  {
+    position: static;
+  }
+  .header__popup-menu-block {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header__popup-menu-block {
+    padding-top: 144px;
+    padding-bottom: 48px;
+  }
+}

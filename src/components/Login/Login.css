@@ -1,0 +1,35 @@
+.login {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #202020;
+  padding-top: 70px;
+  color: white;
+  height: calc(100vh - 70px);
+}
+
+.login__wrapper {
+  max-width: 396px;
+  margin: 0 auto;
+}
+
+.login__logo {
+
+}
+
+.login__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 40px 0 57px 0;
+}
+
+@media screen and (max-width: 500px) {
+  .login__wrapper {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
