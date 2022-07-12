@@ -97,6 +97,17 @@
   align-items: center;
 }
 
+.form__footer__error {
+  color: #EE3465;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 12px;
+  margin: 0;
+  padding-bottom: 12px;
+}
+
 .form__line {
   display: flex;
   justify-content: center;

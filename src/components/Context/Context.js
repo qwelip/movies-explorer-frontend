@@ -6,7 +6,8 @@ export const AppContext = createContext();
 
 const initialState = {
   name: '',
-  email: ''
+  email: '',
+  formError: ''
 }
 
 const reducer = (state, {type, payload}) => {
@@ -23,6 +24,12 @@ const reducer = (state, {type, payload}) => {
         email: payload
       }
     }
+    case 'SET_FORM_ERROR': {
+      return {
+        ...state,
+        formError: payload
+      }
+    }
     default:
       return state
   }
@@ -37,6 +44,10 @@ export const Context = (props) => {
 
   value.setEmail = (email) => {
     dispatch({type: 'SET_EMAIL', payload: email})
+  }
+
+  value.setFormError = (formError) => {
+    dispatch({type: 'SET_FORM_ERROR', payload: formError})
   }
   
   return (

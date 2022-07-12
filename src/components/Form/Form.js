@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { validateEmail, validateName } from '../../utils/utils';
+import { AppContext } from '../Context/Context';
 import './Form.css';
 
 const Form = ({submitAction}) => {
 
   const { pathname } = useLocation()
+  const { formError, setFormError } = useContext(AppContext);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,7 +25,7 @@ const Form = ({submitAction}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    pathname === '/signin' ? submitAction(email, password) : submitAction(name, email, password);
+    pathname === '/signin' ? submitAction(password, email) : submitAction(name, password, email);
   }
 
   const handleFocus = (e) => {
@@ -79,7 +82,13 @@ const Form = ({submitAction}) => {
     }
   }, [name, email, password])
 
-  // todo выводить текст ошибки над кнопкой формы если пришла ошибка с сервера
+  useEffect(() => {
+    if(formError) {
+      setName('');
+      setEmail('');
+      setPassword('');
+    }
+  }, [formError])
 
   return (
     <form action="#" onSubmit={handleSubmit} className='form' >
@@ -89,6 +98,7 @@ const Form = ({submitAction}) => {
             <label ref={nameRef} className='form__label'>Имя</label>
             <input 
               id='name' 
+              value={name}
               className='form__input' 
               type="text" 
               onChange={(e) => setName(e.target.value)} 
@@ -103,6 +113,7 @@ const Form = ({submitAction}) => {
           <label ref={emailRef} className='form__label'>E-mail</label>
           <input 
             id='email'
+            value={email}
             className='form__input' 
             type="email" 
             onChange={(e) => setEmail(e.target.value)} 
@@ -117,6 +128,7 @@ const Form = ({submitAction}) => {
             <label ref={passwordRef} className='form__label'>Password</label>
             <input 
               id='password' 
+              value={password}
               // className='form__input form__input_error' 
               className='form__input' 
               type="password"
@@ -131,11 +143,12 @@ const Form = ({submitAction}) => {
       </div>
       
       <div className="form__footer">
+        { formError && <p className="form__footer__error">{formError}</p> }
         <button className='form__button' type='submit' disabled={isSbmitBtnDisabled}>{btnCaption}</button>
         {pathname !== '/profile' && 
           <span className='form__line'>
             <p className='form__text'>Ещё не зарегистрированы?</p>
-            <Link className='form__link' to={link}>
+            <Link onClick={() => setFormError('')} className='form__link' to={link}>
               {caption}
             </Link>
           </span>

@@ -10,8 +10,8 @@ class MainApi {
     return Promise.reject(`Ошибка ${res.status}`)
   }
 
-  registration(name, password, email) {
-    return fetch(`${this.baseUrl}/signup`, {
+  registration = async (name, password, email) => {
+    const req = await fetch(`${this.baseUrl}/signup`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json" 
@@ -22,11 +22,11 @@ class MainApi {
         email
       })
     })
-    .then((res) => this.handleResponse(res))
+    return await req.json();
   }
 
-  authorization(password, email) {
-    return fetch(`${this.baseUrl}/signin`, {
+  authorization = async (password, email) => {
+    const req = await fetch(`${this.baseUrl}/signin`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json" 
@@ -36,7 +36,21 @@ class MainApi {
         email
       })
     })
-    .then((res) => this.handleResponse(res))
+    return await req.json();
+  }
+
+  setUserInfo = ({name, about, jwt}) => {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        "Authorization" : `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        about
+      })
+    })
   }
 
   getUserInfo(jwt) {

@@ -21,6 +21,7 @@ import './App.css';
 const App = () => {
 
   const history = useHistory();
+  const { setFormError } = useContext(AppContext);
   const { pathname } = useLocation();
   const { setName, setEmail } = useContext(AppContext);
 
@@ -37,34 +38,42 @@ const App = () => {
 
   const onSignOut = () => {
     localStorage.removeItem('jwt');
+    setJwt(''); 
     setLoggedIn(false);
     goToSignInPage();
-    setJwt('');
   }
 
   const registration = (name, password, email) => {
     mainApi.registration(name, password, email)
       .then( data => {
+        if (data.message) {
+          return Promise.reject(data.message)
+        }
         localStorage.setItem('jwt', data.token);
+        setFormError('')
         setJwt(data.token);
         setLoggedIn(true);
         goToMoviesPage();
       })
       .catch((err) => {
-        console.log(err);
+        setFormError(err)
       })
   }
 
   const authorization = (password, email) => {
     mainApi.authorization(password, email)
       .then(data => {
+        if (data.message) {
+          return Promise.reject(data.message)
+        }
         localStorage.setItem('jwt', data.token);
+        setFormError('')
         setJwt(data.token);
         setLoggedIn(true);
         goToMoviesPage();
       })
       .catch(err => {
-        console.log(err);
+        setFormError(err)
       })
   }
 
@@ -76,8 +85,8 @@ const App = () => {
         .then( res => {
           setJwt(jwt);
           setLoggedIn(true);
-          setName(res.data.name)
-          setEmail(res.data.email)
+          setName(res.data.name);
+          setEmail(res.data.email);
           goToMoviesPage();
         })
         .catch( err => {
@@ -85,7 +94,7 @@ const App = () => {
           goToSignInPage();
         })
     }
-  }, [])
+  }, [loggedIn])
 
   return (
     <>
