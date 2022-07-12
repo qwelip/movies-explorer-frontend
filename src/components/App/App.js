@@ -1,9 +1,11 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import mainApi from '../../utils/MainApi';
 import '../../vendor/normalize.css';
+import { AppContext } from '../Context/Context';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
@@ -19,9 +21,10 @@ import './App.css';
 const App = () => {
 
   const history = useHistory();
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
+  const { setName, setEmail } = useContext(AppContext);
 
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false);
   const [jwt, setJwt] = useState('');
 
   const goToMoviesPage = () => {
@@ -73,6 +76,9 @@ const App = () => {
         .then( res => {
           setJwt(jwt);
           setLoggedIn(true);
+          setName(res.data.name)
+          setEmail(res.data.email)
+          goToMoviesPage();
         })
         .catch( err => {
           console.log(err);
