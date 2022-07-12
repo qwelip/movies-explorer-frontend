@@ -1,12 +1,17 @@
 import React from 'react';
 import checkbox from '../../../images/checkbox.png';
+import checkboxDisable from '../../../images/checkbox-disable.png';
 import './FilterCheckbox.css';
 
-const FilterCheckbox = () => {
+const FilterCheckbox = ({isSearchShort, setIsSearchShort}) => {
   return (
-    <div className='filterCheckbox'>
+    <div className='filterCheckbox' onClick={() => setIsSearchShort( prev => !prev)}>
       <p className='filterCheckbox__text'>Короткометражки</p>
-      <img className='filterCheckbox__checkbox' src={checkbox} alt="Чек бокс" />
+      { isSearchShort ?
+        <img className='filterCheckbox__checkbox' src={checkbox} alt="Чек бокс" />
+        :
+        <img className='filterCheckbox__checkbox' src={checkboxDisable} alt="Чек бокс" />
+      }
     </div>
   );
 };
