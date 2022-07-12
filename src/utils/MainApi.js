@@ -11,46 +11,59 @@ class MainApi {
   }
 
   registration = async (name, password, email) => {
-    const req = await fetch(`${this.baseUrl}/signup`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json" 
-      },
-      body: JSON.stringify({
-        name,
-        password,
-        email
+    try {
+      const req = await fetch(`${this.baseUrl}/signup`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+          name,
+          password,
+          email
+        })
       })
-    })
-    return await req.json();
+      return await req.json();
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   authorization = async (password, email) => {
-    const req = await fetch(`${this.baseUrl}/signin`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json" 
-      },
-      body: JSON.stringify({
-        password,
-        email
+    try {
+      const req = await fetch(`${this.baseUrl}/signin`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+          password,
+          email
+        })
       })
-    })
-    return await req.json();
+      return await req.json();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  setUserInfo = ({name, about, jwt}) => {
-    return fetch(`${this.baseUrl}/users/me`, {
-      method: 'PATCH',
-      headers: {
-        "Authorization" : `Bearer ${jwt}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name,
-        about
+  setUserInfo = async (name, email, jwt) => {
+    try {
+      const req = await fetch(`${this.baseUrl}/users/me`, {
+        method: 'PATCH',
+        headers: {
+          "Authorization" : `Bearer ${jwt}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email
+        })
       })
-    })
+      return await req.json();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   getUserInfo(jwt) {

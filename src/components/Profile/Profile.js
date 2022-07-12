@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../Context/Context';
-import Popup from '../Popup/Popup';
 import './Profile.css';
 
-const Profile = ({handleLogout}) => {
+const Profile = ({setPopupVisible}) => {
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const {name, email} = useContext(AppContext);
-
-  const handleClick = () => {
-    setIsPopupOpen(!isPopupOpen)
-  }
 
   return (
     <section className='profile'>
@@ -28,14 +22,13 @@ const Profile = ({handleLogout}) => {
         </div>
       </div>
       <ul className='profile__links'>
-        <button className='profile__link-btn' onClick={handleClick}>
+        <button className='profile__link-btn' onClick={() => setPopupVisible(true)}>
           <li className='profile__link-edit'>Редактировать</li>
         </button>
-        <Link className='profile__link-link' onClick={handleLogout} to='/signin'>
+        <Link className='profile__link-link' to='/signin'>
           <li className='profile__link-quit'>Выйти из аккаунта</li>
         </Link>
       </ul>
-      <Popup isPopupOpen={isPopupOpen} handleClick={handleClick}/>
     </section>
   );
 };

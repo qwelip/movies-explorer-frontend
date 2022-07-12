@@ -12,6 +12,7 @@ import Login from '../Login/Login';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import PopupChangeProfile from '../PopupChangeProfile/PopupChangeProfile';
 import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Register from '../Register/Register';
@@ -21,12 +22,12 @@ import './App.css';
 const App = () => {
 
   const history = useHistory();
-  const { setFormError } = useContext(AppContext);
+  const { setFormError, setName, setEmail } = useContext(AppContext);
   const { pathname } = useLocation();
-  const { setName, setEmail } = useContext(AppContext);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [jwt, setJwt] = useState('');
+  const [isPopupChangeProfileVisible, setIsPopupChangeProfileVisible ] = useState(false);
 
   const goToMoviesPage = () => {
     history.push('/movies');
@@ -74,6 +75,15 @@ const App = () => {
       })
       .catch(err => {
         setFormError(err)
+      })
+  }
+
+  const setUserInfo = (name, email) => {
+    mainApi.setUserInfo(name, email, jwt)
+      .then( res => {
+        setName(res.data.name);
+        setEmail(res.data.email);
+        setIsPopupChangeProfileVisible(false);
       })
   }
 
@@ -130,6 +140,7 @@ const App = () => {
               component={Profile}
               path='/profile'
               handleLogout={onSignOut}
+              setPopupVisible={setIsPopupChangeProfileVisible}
             />
 
             <ProtectedRoute
@@ -142,6 +153,13 @@ const App = () => {
               <PageNotFound/>
             </Route>
           </Switch>
+
+          { isPopupChangeProfileVisible &&
+            <PopupChangeProfile
+              setPopupVisible={setIsPopupChangeProfileVisible}
+              setUserInfo={setUserInfo}
+            />
+          }
         </main>
 
       {(pathname === '/' || 
