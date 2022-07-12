@@ -69,6 +69,11 @@
   opacity: 0.5;
 }
 
+.form__button:disabled {
+  background-color: #424242;
+  cursor: not-allowed;
+}
+
 .form__input_error {
   color: #EE3465;
 }

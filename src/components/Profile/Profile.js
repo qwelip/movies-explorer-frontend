@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Popup from '../Popup/Popup';
 import './Profile.css';
 
-const Profile = () => {
+const Profile = ({handleLogout}) => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -28,7 +28,7 @@ const Profile = () => {
         <button className='profile__link-btn' onClick={handleClick}>
           <li className='profile__link-edit'>Редактировать</li>
         </button>
-        <Link className='profile__link-link' to='/signin'>
+        <Link className='profile__link-link' onClick={handleLogout} to='/signin'>
           <li className='profile__link-quit'>Выйти из аккаунта</li>
         </Link>
       </ul>

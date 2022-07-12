@@ -1,22 +1,28 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { validateEmail, validateName } from '../../utils/utils';
 import './Form.css';
 
-const Form = () => {
+const Form = ({submitAction}) => {
 
   const { pathname } = useLocation()
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSbmitBtnDisabled, setIsSbmitBtnDisabled] = useState(true);
+
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
   const btnCaption = pathname === '/signin' ? 'Войти' : pathname === '/profile' ? 'Оправить' : 'Зарегистрироваться';
   const caption = pathname === '/signin' ? 'Регистрация' : 'Войти';
   const link = pathname === '/signin' ? '/signup' : '/signin';
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    pathname === '/signin' ? submitAction(email, password) : submitAction(name, email, password);
   }
 
   const handleFocus = (e) => {
@@ -57,6 +63,24 @@ const Form = () => {
     }
   }
 
+  const validationInputs = () => {
+    if (pathname === '/signin') {
+      return password.length > 1 && validateEmail(email)
+    } else {
+      return validateName(name) && password.length > 1 && validateEmail(email)
+    }
+  }
+
+  useEffect(() => {
+    if (validationInputs()) {
+      setIsSbmitBtnDisabled(false)
+    } else {
+      setIsSbmitBtnDisabled(true)
+    }
+  }, [name, email, password])
+
+  // todo выводить текст ошибки над кнопкой формы если пришла ошибка с сервера
+
   return (
     <form action="#" onSubmit={handleSubmit} className='form' >
       <div className="form__inputs">
@@ -93,20 +117,21 @@ const Form = () => {
             <label ref={passwordRef} className='form__label'>Password</label>
             <input 
               id='password' 
-              className='form__input form__input_error' 
+              // className='form__input form__input_error' 
+              className='form__input' 
               type="password"
               onChange={(e) => setPassword(e.target.value)} 
               onFocus={handleFocus} 
               onBlur={handleBlur}
               required
             />
-            <label className='form__password-error-text'>Что-то пошло не так...</label>
+            {/* <label className='form__password-error-text'>Что-то пошло не так...</label> */}
           </div>
         }
       </div>
       
       <div className="form__footer">
-        <button className='form__button' type='submit'>{btnCaption}</button>
+        <button className='form__button' type='submit' disabled={isSbmitBtnDisabled}>{btnCaption}</button>
         {pathname !== '/profile' && 
           <span className='form__line'>
             <p className='form__text'>Ещё не зарегистрированы?</p>
