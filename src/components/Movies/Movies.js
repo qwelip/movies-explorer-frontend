@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import SearchForm from './SearchForm/SearchForm';
-import { getMoviesDB, putMoviesToLocalStorage } from '../../utils/MoviesApi';
+import { putMoviesToLocalStorage } from '../../utils/MoviesApi';
 import './Movies.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -9,21 +9,27 @@ import { useEffect } from 'react';
 const Movies = () => {
 
   const [input, setInput] = useState('');
-  const [isSearchShort, setIsSearchShort] = useState(false);
+  const [isSearchShort, setIsSearchShort] = useState('off');
   const [sortedFilms, setSortedFilms] = useState([]);
+  const [width, setWidth] = useState(0);
+  const container = useRef(null);
 
   const handleSearch = () => {
-    const movies = JSON.parse(localStorage.getItem('moviwDb'));
+    const movies = JSON.parse(localStorage.getItem('movieDb'));
     setSortedFilms(movies.filter( item => {
-      if (isSearchShort) {
+      if (isSearchShort === 'on') {
         return item.nameRU.toLowerCase().includes(input.toLowerCase()) && item.duration < 40
       }
       return item.nameRU.toLowerCase().includes(input.toLowerCase())
     }));
   }
 
+  const resizeHandler = () => {
+    setWidth(container.current.clientWidth);
+  };
+
   useEffect(() => {
-    if(localStorage.getItem('searchInput')) {
+    if (localStorage.getItem('searchInput')) {
       setInput(localStorage.getItem('searchInput'));
       setSortedFilms(JSON.parse(localStorage.getItem('lastSortedFilms')));
       setIsSearchShort(localStorage.getItem('isOnlyShortFimls'));
@@ -37,13 +43,21 @@ const Movies = () => {
   }, [sortedFilms])
 
   useEffect(() => {
-    if (input && !localStorage.getItem('moviwDb')) {
+    if (input && !localStorage.getItem('movieDb')) {
       putMoviesToLocalStorage();
     }
   }, [input])
 
+  useEffect(() => {
+    window.addEventListener("resize", resizeHandler);
+    resizeHandler();
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
+
   return (
-    <section className='movies'>
+    <section ref={container} className='movies'>
       <div className="wrapper">
         <SearchForm 
           handleSearch={handleSearch}
@@ -52,8 +66,8 @@ const Movies = () => {
           isSearchShort={isSearchShort}
           setIsSearchShort={setIsSearchShort}
         />
-        { sortedFilms.length !== 0 ? 
-          <MoviesCardList sortedFilms={sortedFilms}/>
+        { sortedFilms.length !== 0 && width ? 
+          <MoviesCardList sortedFilms={sortedFilms} width={width}/>
           :
           <p className='movies__info'>Нет найденых фильмов</p>
         }

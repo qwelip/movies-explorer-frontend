@@ -5,12 +5,12 @@ import './FilterCheckbox.css';
 
 const FilterCheckbox = ({isSearchShort, setIsSearchShort}) => {
   return (
-    <div className='filterCheckbox' onClick={() => setIsSearchShort( prev => !prev)}>
+    <div className='filterCheckbox' onClick={() => setIsSearchShort( prev => prev === 'off' ? 'on' : 'off' )}>
       <p className='filterCheckbox__text'>Короткометражки</p>
-      { isSearchShort ?
-        <img className='filterCheckbox__checkbox' src={checkbox} alt="Чек бокс" />
-        :
+      { isSearchShort === 'off' ?
         <img className='filterCheckbox__checkbox' src={checkboxDisable} alt="Чек бокс" />
+        :
+        <img className='filterCheckbox__checkbox' src={checkbox} alt="Чек бокс" />
       }
     </div>
   );

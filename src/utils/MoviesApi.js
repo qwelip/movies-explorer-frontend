@@ -10,6 +10,6 @@ export const getMoviesDB = async () => {
 }
 
 export const putMoviesToLocalStorage = async () => {
-  const moviwDb = await getMoviesDB();
-  localStorage.setItem('moviwDb', JSON.stringify(moviwDb));
+  const movieDb = await getMoviesDB();
+  localStorage.setItem('movieDb', JSON.stringify(movieDb));
 }
