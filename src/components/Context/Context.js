@@ -8,6 +8,7 @@ const initialState = {
   name: '',
   email: '',
   formError: '',
+  formSuccess: '',
   likedMovieDB: []
 }
 
@@ -31,6 +32,12 @@ const reducer = (state, {type, payload}) => {
         formError: payload
       }
     }
+    case 'SET_FORM_SUCCESS': {
+      return {
+        ...state,
+        formSuccess: payload
+      }
+    }
     case 'ADD_LIKED_MOVIE': {
       return {
         ...state,
@@ -49,7 +56,14 @@ const reducer = (state, {type, payload}) => {
         likedMovieDB: payload
       }
     }
-    
+    case 'RESET_STATE': {
+      return {
+        name: '',
+        email: '',
+        formError: '',
+        likedMovieDB: []
+      }
+    }
     default:
       return state
   }
@@ -70,6 +84,10 @@ export const Context = (props) => {
     dispatch({type: 'SET_FORM_ERROR', payload: formError});
   }
 
+  value.setFormSuccess = (formSuccess) => {
+    dispatch({type: 'SET_FORM_SUCCESS', payload: formSuccess});
+  }
+
   value.setAllLikedMovie = (ids) => {
     dispatch({type: 'SET_ALL_LIKED_MOVIE', payload: ids});
   }
@@ -80,6 +98,10 @@ export const Context = (props) => {
 
   value.addLikedMovie = (id) => {
     dispatch({type: 'ADD_LIKED_MOVIE', payload: id});
+  }
+
+  value.resetState = () => {
+    dispatch({type: 'RESET_STATE'});
   }
   
   return (

@@ -4,9 +4,12 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import MoviesLikedCardList from '../MoviesLikedCardList/MoviesLikedCardList';
+import { useContext } from 'react';
+import { AppContext } from '../Context/Context';
 
 const SavedMovies = ({getLikedMovie, deleteLikeToMovie}) => {
 
+  const {likedMovieDB} = useContext(AppContext)
   const [likedMovies, setLikedMovies] = useState([]);
   const [sortedFilms, setSortedFilms] = useState([]);
   const [input, setInput] = useState('');
@@ -21,12 +24,16 @@ const SavedMovies = ({getLikedMovie, deleteLikeToMovie}) => {
     }));
   }
 
-  console.log({sortedFilms})
-
   useEffect(() => {
     getLikedMovie()
       .then(res => setLikedMovies(res.data))
-  }, [])
+  }, [likedMovieDB])
+
+  useEffect(() => {
+    if (sortedFilms && input) {
+      handleSearch();
+    }
+  }, [isSearchShort])
 
   return (
     <section className='saved-movies'>

@@ -147,6 +147,17 @@
   opacity: 0.5;
 }
 
+.form__success {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  color: #3DDC84;
+  text-align: center;
+}
+
 @media screen and (max-width: 500px) {
   .form {
     height: 466px;

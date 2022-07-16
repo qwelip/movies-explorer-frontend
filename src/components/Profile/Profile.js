@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../Context/Context';
 import './Profile.css';
 
-const Profile = ({setPopupVisible}) => {
+const Profile = ({setPopupVisible, handleLogout}) => {
 
   const {name, email} = useContext(AppContext);
 
@@ -25,7 +25,7 @@ const Profile = ({setPopupVisible}) => {
         <button className='profile__link-btn' onClick={() => setPopupVisible(true)}>
           <li className='profile__link-edit'>Редактировать</li>
         </button>
-        <Link className='profile__link-link' to='/signin'>
+        <Link onClick={handleLogout} className='profile__link-link' to='/signin'>
           <li className='profile__link-quit'>Выйти из аккаунта</li>
         </Link>
       </ul>

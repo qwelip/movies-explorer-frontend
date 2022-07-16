@@ -22,7 +22,7 @@ import './App.css';
 const App = () => {
 
   const history = useHistory();
-  const { setFormError, setName, setEmail } = useContext(AppContext);
+  const { setFormError, setFormSuccess, setName, setEmail, resetState } = useContext(AppContext);
   const { pathname } = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -37,11 +37,21 @@ const App = () => {
     history.push('/signin');
   }
 
+  const goToLanding = () => {
+    history.push('/');
+  }
+
   const onSignOut = () => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('searchInput');
+    localStorage.removeItem('isOnlyShortFimls');
+    localStorage.removeItem('lastSortedFilms');
+    localStorage.removeItem('movieDb');
+    localStorage.removeItem('likedMovies');
+    resetState();
     setJwt(''); 
     setLoggedIn(false);
-    goToSignInPage();
+    goToLanding();
   }
 
   const registration = (name, password, email) => {
@@ -83,7 +93,7 @@ const App = () => {
       .then( res => {
         setName(res.data.name);
         setEmail(res.data.email);
-        setIsPopupChangeProfileVisible(false);
+        setFormSuccess('Профиль обновлен')
       })
   }
 

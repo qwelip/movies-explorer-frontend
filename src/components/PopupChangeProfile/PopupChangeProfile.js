@@ -6,7 +6,7 @@ import Popup from '../Popup/Popup';
 
 const PopupChangeProfile = ({setPopupVisible, setUserInfo}) => {
 
-  const {name: stateName, email: stateEmail} = useContext(AppContext);
+  const {name: stateName, email: stateEmail, formSuccess} = useContext(AppContext);
   const [isSbmitBtnDisabled, setIsSbmitBtnDisabled] = useState(true);
   const [name, setName] = useState(stateName)
   const [email, setEmail] = useState(stateEmail)
@@ -49,6 +49,8 @@ const PopupChangeProfile = ({setPopupVisible, setUserInfo}) => {
             required
           />
         </div>
+        { formSuccess && <p className='form__success'>{formSuccess}</p>}
+        
         <button className='form__button' type='submit' disabled={isSbmitBtnDisabled}>Отправить</button>
       </form>
     </Popup>

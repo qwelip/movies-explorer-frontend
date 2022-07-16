@@ -43,6 +43,12 @@ const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
   }, [])
 
   useEffect(() => {
+    if (localStorage.getItem('movieDb')) {
+      handleSearch();
+    }
+  }, [isSearchShort])
+
+  useEffect(() => {
     localStorage.setItem('searchInput', input);
     localStorage.setItem('isOnlyShortFimls', isSearchShort);
     localStorage.setItem('lastSortedFilms', JSON.stringify(sortedFilms));

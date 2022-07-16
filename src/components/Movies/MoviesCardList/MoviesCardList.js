@@ -11,18 +11,20 @@ const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie})
   const [cardsRendered, setCardsRendered] = useState(0);
   const { pathname } = useLocation();
   let addMovies;
+  let rows = 4;
 
   if (width >= 1232) {
-    addMovies = 4
+    addMovies = 4;
   }
   if (width >= 954 && width < 1232) {
-    addMovies = 3
+    addMovies = 3;
   }
   if (width >= 686 && width < 953) {
-    addMovies = 2
+    addMovies = 2;
   }
   if (width < 686) {
-    addMovies = 1
+    addMovies = 1;
+    rows = 5;
   }
 
   const addMoreCards = () => {
@@ -33,7 +35,7 @@ const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie})
 
   useEffect(() => {
     if (sortedFilms) {
-      const initFilms = sortedFilms.filter( (item, index) => index >= 0 && index < addMovies);
+      const initFilms = sortedFilms.filter( (item, index) => index >= 0 && index < rows * addMovies);
       setRenderedFilms(initFilms);
       setCardsRendered(addMovies);
     }
