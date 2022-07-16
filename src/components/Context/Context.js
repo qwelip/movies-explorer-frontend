@@ -7,7 +7,8 @@ export const AppContext = createContext();
 const initialState = {
   name: '',
   email: '',
-  formError: ''
+  formError: '',
+  likedMovieDB: []
 }
 
 const reducer = (state, {type, payload}) => {
@@ -30,6 +31,25 @@ const reducer = (state, {type, payload}) => {
         formError: payload
       }
     }
+    case 'ADD_LIKED_MOVIE': {
+      return {
+        ...state,
+        likedMovieDB: payload
+      }
+    }
+    case 'SET_ALL_LIKED_MOVIE': {
+      return {
+        ...state,
+        likedMovieDB: [...initialState.likedMovieDB, ...payload]
+      }
+    }
+    case 'DELETE_LIKED_MOVIE': {
+      return {
+        ...state,
+        likedMovieDB: payload
+      }
+    }
+    
     default:
       return state
   }
@@ -39,15 +59,27 @@ export const Context = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
 
   value.setName = (name) => {
-    dispatch({type: 'SET_NAME', payload: name})
+    dispatch({type: 'SET_NAME', payload: name});
   }
 
   value.setEmail = (email) => {
-    dispatch({type: 'SET_EMAIL', payload: email})
+    dispatch({type: 'SET_EMAIL', payload: email});
   }
 
   value.setFormError = (formError) => {
-    dispatch({type: 'SET_FORM_ERROR', payload: formError})
+    dispatch({type: 'SET_FORM_ERROR', payload: formError});
+  }
+
+  value.setAllLikedMovie = (ids) => {
+    dispatch({type: 'SET_ALL_LIKED_MOVIE', payload: ids});
+  }
+
+  value.deleteLikedMovie = (id) => {
+    dispatch({type: 'DELETE_LIKED_MOVIE', payload: id});
+  }
+
+  value.addLikedMovie = (id) => {
+    dispatch({type: 'ADD_LIKED_MOVIE', payload: id});
   }
   
   return (

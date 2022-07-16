@@ -5,16 +5,22 @@ import { putMoviesToLocalStorage } from '../../utils/MoviesApi';
 import './Movies.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Preloader from '../../vendor/preloader/Preloader';
+import { useContext } from 'react';
+import { AppContext } from '../Context/Context';
 
-const Movies = () => {
+const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
 
+  const { setAllLikedMovie } = useContext(AppContext);
   const [input, setInput] = useState('');
   const [isSearchShort, setIsSearchShort] = useState('off');
   const [sortedFilms, setSortedFilms] = useState([]);
   const [width, setWidth] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const container = useRef(null);
 
   const handleSearch = () => {
+    setIsLoading(true)
     const movies = JSON.parse(localStorage.getItem('movieDb'));
     setSortedFilms(movies.filter( item => {
       if (isSearchShort === 'on') {
@@ -40,6 +46,7 @@ const Movies = () => {
     localStorage.setItem('searchInput', input);
     localStorage.setItem('isOnlyShortFimls', isSearchShort);
     localStorage.setItem('lastSortedFilms', JSON.stringify(sortedFilms));
+    setIsLoading(false)
   }, [sortedFilms])
 
   useEffect(() => {
@@ -49,6 +56,12 @@ const Movies = () => {
   }, [input])
 
   useEffect(() => {
+    getLikedMovie()
+      .then(res => {
+        const idsLikedMovies = res.data.map( item => ({localId: item.movieId, serverId: item._id}));
+        setAllLikedMovie(idsLikedMovies);
+      })
+
     window.addEventListener("resize", resizeHandler);
     resizeHandler();
     return () => {
@@ -59,6 +72,7 @@ const Movies = () => {
   return (
     <section ref={container} className='movies'>
       <div className="wrapper">
+        { isLoading && <Preloader/> }
         <SearchForm 
           handleSearch={handleSearch}
           input={input}
@@ -66,8 +80,8 @@ const Movies = () => {
           isSearchShort={isSearchShort}
           setIsSearchShort={setIsSearchShort}
         />
-        { sortedFilms.length !== 0 && width ? 
-          <MoviesCardList sortedFilms={sortedFilms} width={width}/>
+        { sortedFilms.length !== 0 && width && !isLoading ? 
+          <MoviesCardList sortedFilms={sortedFilms} width={width} addLikeToMovie={addLikeToMovie} deleteLikeToMovie={deleteLikeToMovie}/>
           :
           <p className='movies__info'>Нет найденых фильмов</p>
         }

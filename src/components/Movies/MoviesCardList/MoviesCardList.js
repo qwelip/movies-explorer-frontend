@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import BtnMore from '../BtnMore/BtnMore';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({sortedFilms, width}) => {
+const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie}) => {
 
   const [renderedFilms, setRenderedFilms] = useState([]);
   const [cardsRendered, setCardsRendered] = useState(0);
+  const { pathname } = useLocation();
   let addMovies;
 
   if (width >= 1232) {
@@ -40,9 +42,9 @@ const MoviesCardList = ({sortedFilms, width}) => {
   return (
     <>
       <section className='movies-card-list'>
-        {renderedFilms.map( film => <MoviesCard key={film.id} title={film.nameRU} duration={film.duration} image={film.image.url}/>)}
+        {renderedFilms.map( film => <MoviesCard key={film.id} addLikeToMovie={addLikeToMovie} deleteLikeToMovie={deleteLikeToMovie} {...film}/>)}
       </section>
-      {renderedFilms.length !== sortedFilms.length && <BtnMore onClick={addMoreCards}/> }
+      {pathname === '/movies' && renderedFilms.length !== sortedFilms.length && <BtnMore onClick={addMoreCards}/> }
     </>
   );
 };

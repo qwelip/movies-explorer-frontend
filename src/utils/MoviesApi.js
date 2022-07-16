@@ -10,6 +10,10 @@ export const getMoviesDB = async () => {
 }
 
 export const putMoviesToLocalStorage = async () => {
-  const movieDb = await getMoviesDB();
-  localStorage.setItem('movieDb', JSON.stringify(movieDb));
+  try {
+    const movieDb = await getMoviesDB();
+    localStorage.setItem('movieDb', JSON.stringify(movieDb));
+  } catch (err) {
+    console.log('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+  }
 }

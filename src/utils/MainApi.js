@@ -75,6 +75,58 @@ class MainApi {
     })
     .then((res) => this.handleResponse(res))
   }
+
+  likeMovie = async (data, jwt) => {
+    try {
+      const req = await fetch(`${this.baseUrl}/movies`, {
+        method: 'POST',
+        headers: {
+          "Authorization" : `Bearer ${jwt}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          country: data.country,
+          director: data.director,
+          duration: data.duration,
+          year: data.year,
+          description: data.description,
+          image: data.image,
+          trailerLink: data.trailerLink,
+          nameRU: data.nameRU,
+          nameEN: data.nameEN,
+          thumbnail: data.thumbnail,
+          movieId: data.movieId,
+        })
+      })
+      return await req.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  deleteLikeToMovie = (movieId, jwt) => {
+    return fetch(`${this.baseUrl}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization" : `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
+  getLikedMovies = async (jwt) => {
+    try {
+      const req = await fetch(`${this.baseUrl}/movies`, {
+        headers: {
+          "Authorization" : `Bearer ${jwt}`,
+          'Content-Type': 'application/json'
+        }
+        })
+      return await req.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 const mainApi = new MainApi('https://api.diplom-andmed.nomoredomains.xyz');

@@ -87,6 +87,18 @@ const App = () => {
       })
   }
 
+  const addLikeToMovie = (data) => {
+    return mainApi.likeMovie(data, jwt)
+  }
+
+  const deleteLikeToMovie = (movieId) => {
+    return mainApi.deleteLikeToMovie(movieId, jwt)
+  }
+
+  const getLikedMovie = () => {
+    return mainApi.getLikedMovies(jwt)
+  }
+
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
 
@@ -132,6 +144,9 @@ const App = () => {
             <ProtectedRoute
               loggedIn={loggedIn}
               component={Movies}
+              addLikeToMovie={addLikeToMovie}
+              deleteLikeToMovie={deleteLikeToMovie}
+              getLikedMovie={getLikedMovie}
               path='/movies'
             />
 
@@ -146,6 +161,8 @@ const App = () => {
             <ProtectedRoute
               loggedIn={loggedIn}
               component={SavedMovies}
+              getLikedMovie={getLikedMovie}
+              deleteLikeToMovie={deleteLikeToMovie}
               path='/saved-movies'
             />
 
