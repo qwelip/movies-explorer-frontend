@@ -1,12 +1,17 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../Context/Context';
 import './Profile.css';
 
-const Profile = ({setPopupVisible, handleLogout}) => {
+const Profile = ({setPopupVisible, handleLogout, checkAuth}) => {
 
   const {name, email} = useContext(AppContext);
+
+  useEffect(() => {
+    checkAuth()
+  }, [])
 
   return (
     <section className='profile'>
@@ -25,7 +30,7 @@ const Profile = ({setPopupVisible, handleLogout}) => {
         <button className='profile__link-btn' onClick={() => setPopupVisible(true)}>
           <li className='profile__link-edit'>Редактировать</li>
         </button>
-        <Link onClick={handleLogout} className='profile__link-link' to='/signin'>
+        <Link onClick={handleLogout} className='profile__link-link' to='/'>
           <li className='profile__link-quit'>Выйти из аккаунта</li>
         </Link>
       </ul>

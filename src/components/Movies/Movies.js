@@ -9,7 +9,7 @@ import Preloader from '../../vendor/preloader/Preloader';
 import { useContext } from 'react';
 import { AppContext } from '../Context/Context';
 
-const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
+const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie, checkAuth}) => {
 
   const { setAllLikedMovie } = useContext(AppContext);
   const [input, setInput] = useState('');
@@ -18,10 +18,13 @@ const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
   const [width, setWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const container = useRef(null);
+  const counterRender = useRef(0);
 
   const handleSearch = () => {
     setIsLoading(true)
+    setSortedFilms([])
     const movies = JSON.parse(localStorage.getItem('movieDb'));
+    counterRender.current += 1;
     setSortedFilms(movies.filter( item => {
       if (isSearchShort === 'on') {
         return item.nameRU.toLowerCase().includes(input.toLowerCase()) && item.duration < 40
@@ -35,6 +38,7 @@ const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
   };
 
   useEffect(() => {
+    checkAuth();
     if (localStorage.getItem('searchInput')) {
       setInput(localStorage.getItem('searchInput'));
       setSortedFilms(JSON.parse(localStorage.getItem('lastSortedFilms')));
@@ -43,7 +47,7 @@ const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
   }, [])
 
   useEffect(() => {
-    if (localStorage.getItem('movieDb')) {
+    if (localStorage.getItem('movieDb') && counterRender.current !== 0) {
       handleSearch();
     }
   }, [isSearchShort])
@@ -62,7 +66,7 @@ const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie}) => {
   }, [input])
 
   useEffect(() => {
-    getLikedMovie()
+    getLikedMovie(localStorage.getItem('jwt'))
       .then(res => {
         const idsLikedMovies = res.data.map( item => ({localId: item.movieId, serverId: item._id}));
         setAllLikedMovie(idsLikedMovies);

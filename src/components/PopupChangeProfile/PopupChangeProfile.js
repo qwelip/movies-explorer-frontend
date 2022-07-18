@@ -12,7 +12,7 @@ const PopupChangeProfile = ({setPopupVisible, setUserInfo}) => {
   const [email, setEmail] = useState(stateEmail)
 
   const validation = () => {
-    return name !== stateName && email !== stateEmail && validateName(name) && validateEmail(email)
+    return validateName(name) && validateEmail(email) && (name !== stateName || email !== stateEmail)
   }
 
   const handleSubmit = (e) => {
@@ -26,7 +26,7 @@ const PopupChangeProfile = ({setPopupVisible, setUserInfo}) => {
     } else {
       setIsSbmitBtnDisabled(true)
     }
-  }, [name, email])
+  }, [name, email, setUserInfo])
 
   return (
     <Popup setPopupVisible={setPopupVisible}>

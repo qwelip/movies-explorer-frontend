@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -25,7 +26,7 @@ const App = () => {
   const { setFormError, setFormSuccess, setName, setEmail, resetState } = useContext(AppContext);
   const { pathname } = useLocation();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState('no');
   const [jwt, setJwt] = useState('');
   const [isPopupChangeProfileVisible, setIsPopupChangeProfileVisible ] = useState(false);
 
@@ -37,11 +38,8 @@ const App = () => {
     history.push('/signin');
   }
 
-  const goToLanding = () => {
-    history.push('/');
-  }
-
   const onSignOut = () => {
+    setLoggedIn('no');
     localStorage.removeItem('jwt');
     localStorage.removeItem('searchInput');
     localStorage.removeItem('isOnlyShortFimls');
@@ -50,8 +48,6 @@ const App = () => {
     localStorage.removeItem('likedMovies');
     resetState();
     setJwt(''); 
-    setLoggedIn(false);
-    goToLanding();
   }
 
   const registration = (name, password, email) => {
@@ -63,7 +59,7 @@ const App = () => {
         localStorage.setItem('jwt', data.token);
         setFormError('')
         setJwt(data.token);
-        setLoggedIn(true);
+        setLoggedIn('yes');
         goToMoviesPage();
       })
       .catch((err) => {
@@ -80,7 +76,7 @@ const App = () => {
         localStorage.setItem('jwt', data.token);
         setFormError('')
         setJwt(data.token);
-        setLoggedIn(true);
+        setLoggedIn('yes');
         goToMoviesPage();
       })
       .catch(err => {
@@ -105,28 +101,34 @@ const App = () => {
     return mainApi.deleteLikeToMovie(movieId, jwt)
   }
 
-  const getLikedMovie = () => {
+  const getLikedMovie = (jwt) => {
     return mainApi.getLikedMovies(jwt)
   }
 
-  useEffect(() => {
+  const checkAuth = () => {
     const jwt = localStorage.getItem('jwt');
 
     if (jwt) {
       mainApi.getUserInfo(jwt)
         .then( res => {
           setJwt(jwt);
-          setLoggedIn(true);
+          setLoggedIn('yes');
           setName(res.data.name);
           setEmail(res.data.email);
-          goToMoviesPage();
         })
         .catch( err => {
           console.log(err);
+          setLoggedIn('no')
           goToSignInPage();
         })
+    } else {
+      goToSignInPage();
     }
-  }, [loggedIn])
+  }
+
+  if (!loggedIn) {
+    return <></>
+  }
 
   return (
     <>
@@ -157,6 +159,7 @@ const App = () => {
               addLikeToMovie={addLikeToMovie}
               deleteLikeToMovie={deleteLikeToMovie}
               getLikedMovie={getLikedMovie}
+              checkAuth={checkAuth}
               path='/movies'
             />
 
@@ -166,6 +169,7 @@ const App = () => {
               path='/profile'
               handleLogout={onSignOut}
               setPopupVisible={setIsPopupChangeProfileVisible}
+              checkAuth={checkAuth}
             />
 
             <ProtectedRoute
@@ -173,6 +177,7 @@ const App = () => {
               component={SavedMovies}
               getLikedMovie={getLikedMovie}
               deleteLikeToMovie={deleteLikeToMovie}
+              checkAuth={checkAuth}
               path='/saved-movies'
             />
 

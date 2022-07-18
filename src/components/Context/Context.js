@@ -77,7 +77,7 @@ export const Context = (props) => {
   }
 
   value.setEmail = (email) => {
-    dispatch({type: 'SET_EMAIL', payload: email});
+    dispatch({type: 'SET_EMAIL', payload: email});  
   }
 
   value.setFormError = (formError) => {

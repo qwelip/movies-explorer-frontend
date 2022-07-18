@@ -7,7 +7,7 @@ import MoviesLikedCardList from '../MoviesLikedCardList/MoviesLikedCardList';
 import { useContext } from 'react';
 import { AppContext } from '../Context/Context';
 
-const SavedMovies = ({getLikedMovie, deleteLikeToMovie}) => {
+const SavedMovies = ({getLikedMovie, deleteLikeToMovie, checkAuth}) => {
 
   const {likedMovieDB} = useContext(AppContext)
   const [likedMovies, setLikedMovies] = useState([]);
@@ -35,6 +35,12 @@ const SavedMovies = ({getLikedMovie, deleteLikeToMovie}) => {
     }
   }, [isSearchShort])
 
+  useEffect(() => {
+    checkAuth()
+    getLikedMovie(localStorage.getItem('jwt'))
+      .then(res => {setSortedFilms(res.data); console.log(res)})
+  }, [])
+
   return (
     <section className='saved-movies'>
       <div className="wrapper">
@@ -45,7 +51,7 @@ const SavedMovies = ({getLikedMovie, deleteLikeToMovie}) => {
           isSearchShort={isSearchShort}
           setIsSearchShort={setIsSearchShort}
         />
-        { sortedFilms.length !== 0 ? 
+        { sortedFilms && sortedFilms.length !== 0 ? 
           <MoviesLikedCardList sortedFilms={sortedFilms} deleteLikeToMovie={deleteLikeToMovie}/>
           :
           <p className='saved-movies__info'>Нет найденых фильмов</p>

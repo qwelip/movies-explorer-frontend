@@ -41,6 +41,9 @@ const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie})
     }
   }, [sortedFilms])
 
+  console.log('renderedFilms', renderedFilms.length)
+  console.log('sortedFilms', sortedFilms.length)
+
   return (
     <>
       <section className='movies-card-list'>

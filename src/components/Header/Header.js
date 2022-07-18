@@ -58,7 +58,7 @@ const Header = ({loggedIn}) => {
           <Link to='/'>
             <img className='header__logo' src={logo} alt="Логотип" />
           </Link>
-          { loggedIn &&
+          { loggedIn === 'yes' &&
           <>
             <div className="header__navigation-hider">
               <Navigation/>
@@ -69,7 +69,7 @@ const Header = ({loggedIn}) => {
             <PopupMenu/>
           </>
           }
-          {!loggedIn && <RegAndLoginBlock/>}
+          {loggedIn === 'no' && <RegAndLoginBlock/>}
         </div>
       </div>
     </header>

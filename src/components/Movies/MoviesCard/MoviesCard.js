@@ -52,7 +52,6 @@ const MoviesCard = ({duration, image, trailerLink, addLikeToMovie, deleteLikeToM
   useEffect(() => {
     if (likedMovieDB) {
       likedMovieDB.some( item => item.localId === id) && setIsLiked(true) 
-      console.log({likedMovieDB})
     }
   }, [likedMovieDB])
 
