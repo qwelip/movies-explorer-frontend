@@ -1,15 +1,15 @@
-.movies-card__foto {
+.movies-liked-card__foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.movies-card__foto-wrap {
+.movies-liked-card__foto-wrap {
   width: 100%;
   height: 151px;
 }
 
-.movies-card__btn {
+.movies-liked-card__btn {
   position: absolute;
   bottom: 27px;
   right: 0;
@@ -20,18 +20,18 @@
   padding: 0;
 }
 
-.movies-card__like:hover {
+.movies-liked-card__like:hover {
   opacity: 0.5;
 }
 
-.movies-card__block {
+.movies-liked-card__block {
   position: relative;
   height: 49px;
   overflow: hidden;
   padding-bottom: 13px;
 }
 
-.movies-card__title {
+.movies-liked-card__title {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -45,7 +45,7 @@
   overflow: hidden;
 }
 
-.movies-card__duration {
+.movies-liked-card__duration {
   border-top: 1px solid #424242;
   padding-top: 6px;
   font-family: 'Inter';
@@ -58,24 +58,24 @@
 }
 
 @media screen and (max-width: 768px) {
-  .movies-card__foto-wrap {
+  .movies-liked-card__foto-wrap {
     height: 190px;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .movies-card__title {
+  .movies-liked-card__title {
     font-size: 12px;
     line-height: 15px;
   }
-  .movies-card__duration {
+  .movies-liked-card__duration {
     font-size: 10px;
     line-height: 12px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .movies-card__foto-wrap {
+  .movies-liked-card__foto-wrap {
     height: 168px;
   }
 }

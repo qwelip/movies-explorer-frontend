@@ -1,16 +1,36 @@
-import React from 'react';
-import './SearchForm.css';
+import React, { useState } from 'react';
 import search from '../../../images/find.png';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import './SearchForm.css';
 
-const SearchForm = () => {
+const SearchForm = ({handleSearch, input, setInput, isSearchShort, setIsSearchShort}) => {
+
+  const [isValidInput, setIsValidInput] = useState(true);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!input) {
+      setIsValidInput(false);
+      return
+    }
+    setIsValidInput(true);
+    handleSearch();
+  }
+
   return (
-    <form action="#" className='searchForm'>
-      <input className='searchForm__input' type="text" placeholder='Фильм' required/>
+    <form action="#" onSubmit={handleSubmit} className='searchForm'>
+      { !isValidInput && <p className='searchForm__error'>Пустое значение в поисковой строке</p> }
+      <input 
+        value={input} 
+        onChange={ e => setInput(e.target.value)}
+        className='searchForm__input' 
+        type="text" 
+        placeholder='Фильм' 
+      />
       <button type='submit' className='searchForm__search-btn'>
         <img className='searchForm__search-img' src={search} alt="Кнопка поиска" />
       </button>
-      <FilterCheckbox/>
+      <FilterCheckbox isSearchShort={isSearchShort} setIsSearchShort={setIsSearchShort}/>
     </form>
   );
 };

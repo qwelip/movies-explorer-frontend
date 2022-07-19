@@ -4,7 +4,7 @@ import menu from '../../images/menu.png';
 import avatar from '../../images/ava.png'
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const RegAndLoginBlock = () => {
   return (
@@ -49,9 +49,7 @@ const PopupMenu = () => {
   );
 };
 
-const Header = () => {
-
-  const { pathname } = useLocation();
+const Header = ({loggedIn}) => {
 
   return (
     <header className='header'>
@@ -60,7 +58,7 @@ const Header = () => {
           <Link to='/'>
             <img className='header__logo' src={logo} alt="Логотип" />
           </Link>
-          {pathname !== '/' &&
+          { loggedIn === 'yes' &&
           <>
             <div className="header__navigation-hider">
               <Navigation/>
@@ -68,10 +66,10 @@ const Header = () => {
             <div className="header__account-block-hider">
               <AccountBlock/>
             </div>
+            <PopupMenu/>
           </>
           }
-          {pathname === '/' && <RegAndLoginBlock/>}
-          {pathname !== '/' && <PopupMenu/>}
+          {loggedIn === 'no' && <RegAndLoginBlock/>}
         </div>
       </div>
     </header>

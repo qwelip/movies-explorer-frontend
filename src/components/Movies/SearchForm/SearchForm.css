@@ -1,8 +1,19 @@
 .searchForm {
+  position: relative;
   display: flex;
   position: relative;
   padding-bottom: 83px;
   border-bottom: 1px solid #aaaaaa37;
+}
+
+.searchForm__error {
+  position: absolute;
+  top: 50px;
+  left: 22px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #EE3465;
 }
 
 .searchForm__input {

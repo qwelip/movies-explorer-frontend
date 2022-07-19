@@ -4,7 +4,6 @@ import logo from '../../images/logo.png';
 import Form from '../Form/Form';
 import { Link } from 'react-router-dom';
 
-const Register = () => {
   return (
     <section className='register'>
       <div className="register__wrapper">
@@ -12,7 +11,7 @@ const Register = () => {
           <img className='login__logo' src={logo} alt="Лого" />
         </Link>
         <h1 className='register__title'>Добро пожаловать!</h1>
-        <Form/>
+        <Form submitAction={registration}/>
       </div>
     </section>
   );

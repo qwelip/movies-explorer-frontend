@@ -1,28 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import BtnMore from '../BtnMore/BtnMore';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const testData = [ 
-  {title: 'Киноальманах «100 лет дизайна»', length: 13},
-  {title: 'Gimme Danger: История Игги и The Stooges', length: 12},
-  {title: 'Gimme Danger: История Игги и The Stooges', length: 54},
-  {title: 'Баския: Взрыв реальности', length: 34},
-  {title: 'По волнам: Искусство звука в кино', length: 34},
-  {title: 'Дженис: Маленькая девочка грустит', length: 20},
-  {title: 'Пи Джей Харви: A dog called money', length: 40},
-  {title: 'Скейт — кухня', length: 60},
-  {title: 'Gimme Danger: История Игги и The Stooges', length: 30},
-  {title: 'Gimme Danger: История Игги и The Stooges', length: 10},
-]
+const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie}) => {
 
-const MoviesCardList = () => {
+  const [renderedFilms, setRenderedFilms] = useState([]);
+  const [cardsRendered, setCardsRendered] = useState(0);
+  const { pathname } = useLocation();
+  let addMovies;
+  let rows = 4;
+
+  if (width >= 1232) {
+    addMovies = 4;
+  }
+  if (width >= 954 && width < 1232) {
+    addMovies = 3;
+  }
+  if (width >= 686 && width < 953) {
+    addMovies = 2;
+  }
+  if (width < 686) {
+    addMovies = 1;
+    rows = 5;
+  }
+
+  const addMoreCards = () => {
+    const newCards = sortedFilms.filter((item, index) => index >= cardsRendered && index < cardsRendered + addMovies);
+    setRenderedFilms(prev => [...prev, ...newCards]);
+    setCardsRendered(prev => prev + addMovies);
+  }
+
+  useEffect(() => {
+    if (sortedFilms) {
+      const initFilms = sortedFilms.filter( (item, index) => index >= 0 && index < rows * addMovies);
+      setRenderedFilms(initFilms);
+      setCardsRendered(rows * addMovies);
+    }
+  }, [sortedFilms])
+
+  console.log('renderedFilms', renderedFilms.length)
+  console.log('sortedFilms', sortedFilms.length)
+
   return (
     <>
       <section className='movies-card-list'>
-        {testData.map( (film, index) => <MoviesCard key={index} title={film.title} length={film.length}/>)}
+        {renderedFilms.map( film => <MoviesCard key={film.id} addLikeToMovie={addLikeToMovie} deleteLikeToMovie={deleteLikeToMovie} {...film}/>)}
       </section>
-      <BtnMore/>
+      {pathname === '/movies' && renderedFilms.length < sortedFilms.length && <BtnMore onClick={addMoreCards}/> }
     </>
   );
 };

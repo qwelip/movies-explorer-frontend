@@ -12,10 +12,10 @@ const Navigation = ({onClose}) => {
       <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' exact to='/' onClick={onClose}>
         Главная
       </NavLink>
-      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' to='/movies' onClick={onClose}>
+      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' exact to='/movies' onClick={onClose}>
         Фильмы
       </NavLink>
-      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' to='/saved-movies' onClick={onClose}>
+      <NavLink className='navigation__link navigation__link_first' activeClassName='navigation__link_active' exact to='/saved-movies' onClick={onClose}>
         Сохранённые фильмы
       </NavLink>
     </nav>

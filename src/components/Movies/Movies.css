@@ -5,6 +5,21 @@
   padding-top: 154px;
   padding-bottom: 80px;
   color: white;
+  min-height: calc(100vh - 154px - 80px - 175px);
+}
+
+.movies__info {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #313131;
+  text-align: center;
 }
 
 @media screen and (max-width: 400px) {
