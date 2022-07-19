@@ -21,8 +21,7 @@ const Movies = ({addLikeToMovie, deleteLikeToMovie, getLikedMovie, checkAuth}) =
   const counterRender = useRef(0);
 
   const handleSearch = () => {
-    setIsLoading(true)
-    setSortedFilms([])
+    setIsLoading(true);
     const movies = JSON.parse(localStorage.getItem('movieDb'));
     counterRender.current += 1;
     setSortedFilms(movies.filter( item => {

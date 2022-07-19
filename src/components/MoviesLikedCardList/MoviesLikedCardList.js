@@ -2,10 +2,10 @@ import React from 'react';
 import MoviesLikedCard from '../Movies/MoviesLikedCard/MoviesLikedCard';
 import './MoviesLikedCardList.css';
 
-const MoviesLikedCardList = ({sortedFilms, deleteLikeToMovie}) => {
+const MoviesLikedCardList = ({filmsToRender, deleteLikeToMovie}) => {
   return (
     <section className='movies-liked-card-list'>
-      { sortedFilms.map( item => <MoviesLikedCard key={item.id} deleteLikeToMovie={deleteLikeToMovie} {...item}/>) }
+      { filmsToRender.map( item => <MoviesLikedCard key={item.id} deleteLikeToMovie={deleteLikeToMovie} {...item}/>) }
     </section>
   );
 };

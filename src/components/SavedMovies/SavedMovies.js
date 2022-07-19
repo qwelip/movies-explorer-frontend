@@ -9,14 +9,14 @@ import { AppContext } from '../Context/Context';
 
 const SavedMovies = ({getLikedMovie, deleteLikeToMovie, checkAuth}) => {
 
+  const [likedMovie, setLikedMovie] = useState([]);
+  const [filmsToRender, setFilmsToRender] = useState([]);
   const {likedMovieDB} = useContext(AppContext)
-  const [likedMovies, setLikedMovies] = useState([]);
-  const [sortedFilms, setSortedFilms] = useState([]);
   const [input, setInput] = useState('');
   const [isSearchShort, setIsSearchShort] = useState('off');
 
   const handleSearch = () => {
-    setSortedFilms(likedMovies.filter( item => {
+    setFilmsToRender(likedMovie.filter( item => {
       if (isSearchShort === 'on') {
         return item.nameRU.toLowerCase().includes(input.toLowerCase()) && item.duration < 40
       }
@@ -25,12 +25,12 @@ const SavedMovies = ({getLikedMovie, deleteLikeToMovie, checkAuth}) => {
   }
 
   useEffect(() => {
-    getLikedMovie()
-      .then(res => setLikedMovies(res.data))
+    getLikedMovie(localStorage.getItem('jwt'))
+      .then(res => setLikedMovie(res.data))
   }, [likedMovieDB])
 
   useEffect(() => {
-    if (sortedFilms && input) {
+    if (likedMovie && input) {
       handleSearch();
     }
   }, [isSearchShort])
@@ -38,7 +38,7 @@ const SavedMovies = ({getLikedMovie, deleteLikeToMovie, checkAuth}) => {
   useEffect(() => {
     checkAuth()
     getLikedMovie(localStorage.getItem('jwt'))
-      .then(res => {setSortedFilms(res.data); console.log(res)})
+      .then(res => {setLikedMovie(res.data); setFilmsToRender(res.data)})
   }, [])
 
   return (
@@ -51,8 +51,8 @@ const SavedMovies = ({getLikedMovie, deleteLikeToMovie, checkAuth}) => {
           isSearchShort={isSearchShort}
           setIsSearchShort={setIsSearchShort}
         />
-        { sortedFilms && sortedFilms.length !== 0 ? 
-          <MoviesLikedCardList sortedFilms={sortedFilms} deleteLikeToMovie={deleteLikeToMovie}/>
+        { filmsToRender && filmsToRender.length !== 0 ? 
+          <MoviesLikedCardList filmsToRender={filmsToRender} deleteLikeToMovie={deleteLikeToMovie}/>
           :
           <p className='saved-movies__info'>Нет найденых фильмов</p>
         }

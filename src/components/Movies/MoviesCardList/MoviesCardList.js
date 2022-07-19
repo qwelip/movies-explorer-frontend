@@ -37,7 +37,7 @@ const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie})
     if (sortedFilms) {
       const initFilms = sortedFilms.filter( (item, index) => index >= 0 && index < rows * addMovies);
       setRenderedFilms(initFilms);
-      setCardsRendered(addMovies);
+      setCardsRendered(rows * addMovies);
     }
   }, [sortedFilms])
 
@@ -49,7 +49,7 @@ const MoviesCardList = ({sortedFilms, width, addLikeToMovie, deleteLikeToMovie})
       <section className='movies-card-list'>
         {renderedFilms.map( film => <MoviesCard key={film.id} addLikeToMovie={addLikeToMovie} deleteLikeToMovie={deleteLikeToMovie} {...film}/>)}
       </section>
-      {pathname === '/movies' && renderedFilms.length !== sortedFilms.length && <BtnMore onClick={addMoreCards}/> }
+      {pathname === '/movies' && renderedFilms.length < sortedFilms.length && <BtnMore onClick={addMoreCards}/> }
     </>
   );
 };

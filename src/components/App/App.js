@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import mainApi from '../../utils/MainApi';
 import '../../vendor/normalize.css';
 import { AppContext } from '../Context/Context';
@@ -36,6 +36,10 @@ const App = () => {
 
   const goToSignInPage = () => {
     history.push('/signin');
+  }
+
+  const goToLanding = () => {
+    history.push('/');
   }
 
   const onSignOut = () => {
@@ -122,7 +126,7 @@ const App = () => {
           goToSignInPage();
         })
     } else {
-      goToSignInPage();
+      goToLanding();
     }
   }
 

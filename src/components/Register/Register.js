@@ -4,7 +4,6 @@ import logo from '../../images/logo.png';
 import Form from '../Form/Form';
 import { Link } from 'react-router-dom';
 
-const Register = ({registration}) => {
   return (
     <section className='register'>
       <div className="register__wrapper">
